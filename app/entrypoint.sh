@@ -6,7 +6,7 @@ python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
 # Carga los datos iniciales de la aplicación
-python manage.py loaddata admin_interface_theme_biblioteca.json
+#python manage.py loaddata admin_interface_theme_biblioteca.json
 
 # Verifica si el usuario administrador ya existe
 python manage.py shell <<EOF
@@ -27,10 +27,12 @@ if not User.objects.filter(username='admin').exists():
         area=None,
         rol=None
     )
-    
-    
-    admin_group = Group.objects.get(name='Administradores')
-    admin_group.user_set.add(admin_user)
+
+    # Agrega el usuario administrador al grupo de administradores
+    # admin_group = Group.objects.get(name='Administradores')
+    # admin_group.user_set.add(admin_user)
+
+    # Guarda los cambios en la base de datos
     admin_user.save()
 else:
     # El usuario administrador ya existe, no es necesario crearlo
